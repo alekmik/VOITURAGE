@@ -7,10 +7,10 @@ namespace Voiturage.Models
     {
         public Utilisateur()
         {
-            AviId2UtilisateurNavigations = new HashSet<Avi>();
-            AviIdUtilisateurNavigations = new HashSet<Avi>();
-            Trajets = new HashSet<Trajet>();
-            IdTrajets = new HashSet<Trajet>();
+            Notes = new HashSet<Avis>();
+            NotesDonnees = new HashSet<Avis>();
+            TrajetsChauffeur = new HashSet<Trajet>();
+            TrajetsPassager = new HashSet<Trajet>();
         }
 
         public int Id { get; set; }
@@ -24,11 +24,11 @@ namespace Voiturage.Models
         public string Photo { get; set; } = null!;
         public int? IdVoiture { get; set; }
 
-        public virtual Voiture? IdVoitureNavigation { get; set; }
-        public virtual ICollection<Avi> AviId2UtilisateurNavigations { get; set; }
-        public virtual ICollection<Avi> AviIdUtilisateurNavigations { get; set; }
-        public virtual ICollection<Trajet> Trajets { get; set; }
+        public virtual Voiture? Voiture { get; set; }
+        public virtual ICollection<Avis> Notes { get; set; }
+        public virtual ICollection<Avis> NotesDonnees { get; set; }
+        public virtual ICollection<Trajet> TrajetsPassager { get; set; }
 
-        public virtual ICollection<Trajet> IdTrajets { get; set; }
+        public virtual ICollection<Trajet> TrajetsChauffeur { get; set; }
     }
 }

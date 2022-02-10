@@ -7,14 +7,14 @@ namespace Voiturage.Models
     {
         public Ville()
         {
-            TrajetId2VilleNavigations = new HashSet<Trajet>();
-            TrajetIdVilleNavigations = new HashSet<Trajet>();
+            TrajetAuDepart = new HashSet<Trajet>();
+            TrajetALarrivee = new HashSet<Trajet>();
         }
 
         public int Id { get; set; }
         public string Nom { get; set; } = null!;
 
-        public virtual ICollection<Trajet> TrajetId2VilleNavigations { get; set; }
-        public virtual ICollection<Trajet> TrajetIdVilleNavigations { get; set; }
+        public virtual ICollection<Trajet> TrajetAuDepart { get; set; }
+        public virtual ICollection<Trajet> TrajetALarrivee { get; set; }
     }
 }

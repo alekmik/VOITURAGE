@@ -17,7 +17,7 @@ namespace Voiturage.Data
         {
         }
 
-        public virtual DbSet<Avi> Avis { get; set; } = null!;
+        public virtual DbSet<Avis> Avis { get; set; } = null!;
         public virtual DbSet<Trajet> Trajets { get; set; } = null!;
         public virtual DbSet<Utilisateur> Utilisateurs { get; set; } = null!;
         public virtual DbSet<Ville> Villes { get; set; } = null!;
@@ -34,7 +34,7 @@ namespace Voiturage.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Avi>(entity =>
+            modelBuilder.Entity<Avis>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
 
@@ -42,30 +42,30 @@ namespace Voiturage.Data
                     .HasColumnType("text")
                     .HasColumnName("commentaire");
 
-                entity.Property(e => e.Id2Utilisateur).HasColumnName("id_2_Utilisateur");
+                entity.Property(e => e.IdNote).HasColumnName("id_2_Utilisateur");
 
                 entity.Property(e => e.IdTrajet).HasColumnName("id_Trajet");
 
-                entity.Property(e => e.IdUtilisateur).HasColumnName("id_Utilisateur");
+                entity.Property(e => e.IdNotant).HasColumnName("id_Utilisateur");
 
                 entity.Property(e => e.Note).HasColumnName("note");
 
-                entity.HasOne(d => d.Id2UtilisateurNavigation)
-                    .WithMany(p => p.AviId2UtilisateurNavigations)
-                    .HasForeignKey(d => d.Id2Utilisateur)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                entity.HasOne(d => d.UtilisateurNote)
+                    .WithMany(p => p.Notes)
+                    .HasForeignKey(d => d.IdNote)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("Avis_Utilisateur2_FK");
 
-                entity.HasOne(d => d.IdTrajetNavigation)
+                entity.HasOne(d => d.Trajet)
                     .WithMany(p => p.Avis)
                     .HasForeignKey(d => d.IdTrajet)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("Avis_Trajet0_FK");
 
-                entity.HasOne(d => d.IdUtilisateurNavigation)
-                    .WithMany(p => p.AviIdUtilisateurNavigations)
-                    .HasForeignKey(d => d.IdUtilisateur)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                entity.HasOne(d => d.UtilisateurNotant)
+                    .WithMany(p => p.NotesDonnees)
+                    .HasForeignKey(d => d.IdNotant)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("Avis_Utilisateur_FK");
             });
 
@@ -83,30 +83,30 @@ namespace Voiturage.Data
                     .HasColumnType("datetime")
                     .HasColumnName("heureDepart");
 
-                entity.Property(e => e.Id2Ville).HasColumnName("id_2_Ville");
+                entity.Property(e => e.IdVilleArrivee).HasColumnName("id_2_Ville");
 
-                entity.Property(e => e.IdUtilisateur).HasColumnName("id_Utilisateur");
+                entity.Property(e => e.Chauffeur).HasColumnName("id_Utilisateur");
 
-                entity.Property(e => e.IdVille).HasColumnName("id_Ville");
+                entity.Property(e => e.IdVilleDepart).HasColumnName("id_Ville");
 
                 entity.Property(e => e.Prix).HasColumnName("prix");
 
-                entity.HasOne(d => d.Id2VilleNavigation)
-                    .WithMany(p => p.TrajetId2VilleNavigations)
-                    .HasForeignKey(d => d.Id2Ville)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                entity.HasOne(d => d.VilleArrivee)
+                    .WithMany(p => p.TrajetALarrivee)
+                    .HasForeignKey(d => d.IdVilleArrivee)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("Trajet_Ville2_FK");
 
-                entity.HasOne(d => d.IdUtilisateurNavigation)
-                    .WithMany(p => p.Trajets)
-                    .HasForeignKey(d => d.IdUtilisateur)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                entity.HasOne(d => d.Chauffeur)
+                    .WithMany(p => p.TrajetsChauffeur)
+                    .HasForeignKey(d => d.IdChauffeur)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("Trajet_Utilisateur0_FK");
 
-                entity.HasOne(d => d.IdVilleNavigation)
-                    .WithMany(p => p.TrajetIdVilleNavigations)
-                    .HasForeignKey(d => d.IdVille)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                entity.HasOne(d => d.VilleDepart)
+                    .WithMany(p => p.TrajetAuDepart)
+                    .HasForeignKey(d => d.IdVilleDepart)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("Trajet_Ville_FK");
             });
 
@@ -155,13 +155,13 @@ namespace Voiturage.Data
                     .IsUnicode(false)
                     .HasColumnName("username");
 
-                entity.HasOne(d => d.IdVoitureNavigation)
+                entity.HasOne(d => d.Voiture)
                     .WithMany(p => p.Utilisateurs)
                     .HasForeignKey(d => d.IdVoiture)
                     .HasConstraintName("Utilisateur_Voiture_FK");
 
-                entity.HasMany(d => d.IdTrajets)
-                    .WithMany(p => p.Ids)
+                entity.HasMany(d => d.TrajetsPassager)
+                    .WithMany(p => p.Passagers)
                     .UsingEntity<Dictionary<string, object>>(
                         "Passager",
                         l => l.HasOne<Trajet>().WithMany().HasForeignKey("IdTrajet").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("passagers_Trajet0_FK"),
