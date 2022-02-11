@@ -34,6 +34,7 @@ namespace Voiturage.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
             modelBuilder.Entity<Avis>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -85,7 +86,7 @@ namespace Voiturage.Data
 
                 entity.Property(e => e.IdVilleArrivee).HasColumnName("id_2_Ville");
 
-                entity.Property(e => e.Chauffeur).HasColumnName("id_Utilisateur");
+                //entity.Property(e => e.Chauffeur).HasColumnName("id_Utilisateur");
 
                 entity.Property(e => e.IdVilleDepart).HasColumnName("id_Ville");
 
@@ -207,8 +208,10 @@ namespace Voiturage.Data
             });
 
             OnModelCreatingPartial(modelBuilder);
+            
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
     }
 }
