@@ -85,7 +85,7 @@ namespace Voiturage.Data
 
                 entity.Property(e => e.IdVilleArrivee).HasColumnName("id_2_Ville");
 
-                entity.Property(e => e.Chauffeur).HasColumnName("id_Utilisateur");
+                entity.Property(e => e.IdChauffeur).HasColumnName("id_Utilisateur");
 
                 entity.Property(e => e.IdVilleDepart).HasColumnName("id_Ville");
 
