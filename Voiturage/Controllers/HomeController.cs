@@ -15,6 +15,10 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        byte[] userid = new byte[4];
+        bool connected = HttpContext.Session.TryGetValue("UserID", out userid);
+        if (connected)
+            ViewData["UserID"] = BitConverter.ToInt32(userid);
         return View();
     }
 

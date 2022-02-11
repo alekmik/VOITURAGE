@@ -1,9 +1,10 @@
-﻿@{
+﻿@using System.Web;
+@{
     ViewData["Title"] = "Home Page";
+    int ? userid = (int?)ViewData["UserID"];
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-
+@if (ViewData["UserID"] !=null)
+{
+    <p>@userid.ToString()</p>
+}
