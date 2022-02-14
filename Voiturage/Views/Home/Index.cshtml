@@ -1,10 +1,10 @@
 ﻿@using System.Web;
 @{
     ViewData["Title"] = "Home Page";
-    int ? userid = (int?)ViewData["UserID"];
+    Utilisateur ? user = ViewData["User"] as Utilisateur;
 }
 
-@if (ViewData["UserID"] !=null)
+@if (ViewData["User"] !=null)
 {
-    <p>@userid.ToString()</p>
+    <p>@user.Nom</p>
 }

@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Utilisateur ? user = ViewData["User"] as Utilisateur;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -31,19 +35,39 @@
             </div>
             <div class="dropdown">
             </div>
-            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Identifiez vous
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
-                            <li><a class="dropdown-item" asp-action="Register" asp-controller="Login">Inscription</a></li>
-                            <li><a class="dropdown-item" asp-action="Index" asp-controller="Login">Connexion</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+            @if (user == null)
+            {
+                <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Identifiez vous
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
+                                <li><a class="dropdown-item" asp-action="Register" asp-controller="Login">Inscription</a></li>
+                                <li><a class="dropdown-item" asp-action="Index" asp-controller="Login">Connexion</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Identifiez vous
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
+                                <li><a class="dropdown-item" asp-action="Register" asp-controller="Login">@user.Nom</a></li>
+                                <li><a class="dropdown-item" asp-action="Index" asp-controller="Login">Connexion</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            }
+
         </nav>
 
     </header>

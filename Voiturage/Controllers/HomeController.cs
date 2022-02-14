@@ -1,24 +1,28 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Voiturage.Models;
+using Voiturage.Data;
 
 namespace Voiturage.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly voiturageContext _db;
 
-    public HomeController(ILogger<HomeController> logger)
+
+    public HomeController(ILogger<HomeController> logger,voiturageContext db)
     {
         _logger = logger;
+        _db = db;
     }
 
     public IActionResult Index()
     {
         byte[] userid = new byte[4];
-        bool connected = HttpContext.Session.TryGetValue("UserID", out userid);
+        bool connected = HttpContext.Session.TryGetValue("User", out userid!);
         if (connected)
-            ViewData["UserID"] = BitConverter.ToInt32(userid);
+            ViewData["User"] = _db.Utilisateurs.FirstOrDefault(x=>x.Id==BitConverter.ToInt32(userid));
         return View();
     }
 
