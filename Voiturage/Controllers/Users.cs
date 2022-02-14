@@ -1,4 +1,5 @@
-﻿
+﻿using System.Security.Cryptography;
+using System.Text;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Voiturage.Data;
@@ -41,11 +42,33 @@ namespace Voiturage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Utilisateur user)
         {
+            //Verification de l'existance de la voiture dans la base de données.
+            List<Voiture> voitures = _dbConnect.Voitures.ToList();
+            var query = from c in voitures where c.Marque == user.Voiture.Marque && c.Modele == user.Voiture.Modele select c;
+            if(query.Count() > 0)
+            {
+                Voiture car = query.Single();
+                user.IdVoiture = car.Id;
+            }
+            else
+            {
+                Voiture car = user.Voiture;
+                _dbConnect.Voitures.Add(car);
+                _dbConnect.SaveChanges();
+                user.IdVoiture = car.Id;    
+            }
+            //Récupération du fichier de la photo
             var photoFile = Request.Form.Files;
-            user.Salt = "fdq";
+            //Sécutisation du mot de passe.
+            Random random = new Random();
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-@&%^+/.?!$";
+            user.Salt = new string(Enumerable.Repeat(chars, 5).Select(s => s[random.Next(s.Length)]).ToArray());
+            user.Password = ComputeSha256Hash(user.Password+user.Salt);
             try
             {
+                //Enregistrement de la photo dans le dossier images
                 user.Photo = ChargerFichier(photoFile[0], "");
+                //Enregistrement du nouvel utilisateur dans la base de données.
                 _dbConnect.Utilisateurs.Add(user);
                 if (_dbConnect.SaveChanges() > 0)
                 {
@@ -132,6 +155,23 @@ namespace Voiturage.Controllers
                 }
             }
             return photo;
+        }
+        static string ComputeSha256Hash(string rawData)
+        {
+            // Create a SHA256   
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // ComputeHash - returns byte array  
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                // Convert byte array to a string   
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
         }
     }
 }

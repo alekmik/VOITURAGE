@@ -48,8 +48,12 @@
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdVoiture" class="control-label"></label>
-                <select asp-for="IdVoiture" class ="form-control" asp-items="ViewBag.IdVoiture"></select>
+                <label asp-for="Voiture.Marque" class="control-label">Marque de voiture</label>
+                <input asp-for="Voiture.Marque" class="form-control"></input>
+            </div>
+            <div class="form-group">
+                <label asp-for="Voiture.Modele" class="control-label">Model de voiture</label>
+                <input asp-for="Voiture.Modele" class="form-control"></input>
             </div>
             <div class="form-group">
                     <label asp-for="Photo" class="control-label"></label>
