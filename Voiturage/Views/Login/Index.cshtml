@@ -1,0 +1,40 @@
+﻿@model LoginViewModel
+
+<h2 style="text-align:center;color:deepskyblue;" class="mb-3">Connection</h2>
+<div class="container">
+    <form method="post">
+        <div class="row">
+            <div class="col login">
+                <a href="#" class="fb btn mb-3" style="display:block;">
+                    <i class="bi bi-facebook"></i> Continuez avec Facebook
+                </a>
+                <a href="#" class="twitter btn mb-3" style="display:block;">
+                    <i class="bi bi-twitter fa-fw"></i> Continuez avec Twitter
+                </a>
+                <a href="#" class="google btn mb-3" style="display:block;">
+                    <i class="bi bi-google fa-fw"></i> Continuez avec Google+
+                </a>
+            </div>
+
+            <div class="col login">
+                <label asp-for="Username"></label>
+                <input asp-for="Username" class="form-control" />
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" type="password" />
+                <input type="submit" value="Login" class="btn btn-primary mt-2">
+                <div class="bottom-container">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <a asp-action="Register" class="btn">S'enregistrer</a>
+                        </div>
+                        <div class="col">
+                            <a href="#" class="btn">Mot de passe oublié</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+           
+    </form>
+</div>
+
