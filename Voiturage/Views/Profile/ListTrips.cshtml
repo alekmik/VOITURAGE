@@ -1,0 +1,40 @@
+﻿@model Utilisateur
+<h1>@ViewData["Title"]</h1>
+
+<div>
+@*Trips list for current user*@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Départ
+            </th>
+            <th>
+                Arrivée
+            </th>
+            <th>
+                Places libres / Max
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            @foreach(Trajet trajet in ViewBag.trajets)
+            {
+                <td>
+                    @trajet.VilleDepart.Nom  @trajet.HeureDepart
+                </td>
+                <td>
+                    @trajet.VilleArrivee.Nom  @trajet.HeureDepart
+                </td>
+                <td>
+                    @trajet.Place / @trajet.PlaceMax
+                </td>
+            }
+        </tr>
+    </tbody>
+        
+
+</table>
+
+</div>
