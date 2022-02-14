@@ -16,3 +16,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+.blue_bg{
+    background-color: rgb(0, 175, 245);
+}
+.white_bg{
+    background-color: rgb(255, 255, 255);
+}

@@ -29,9 +29,9 @@ namespace Voiturage.Models
         [Display(Name = "Pseudo")]
         public string Username { get; set; } = null!;
         public string Photo { get; set; } = null!;
-        public int? IdVoiture { get; set; }
+        public int? IdVoiture { get; set; } = null!;
 
-        public virtual Voiture? Voiture { get; set; }
+        public virtual Voiture? Voiture { get; set; } = default!;
         public virtual ICollection<Avis> Notes { get; set; }
         public virtual ICollection<Avis> NotesDonnees { get; set; }
         public virtual ICollection<Trajet> TrajetsPassager { get; set; }

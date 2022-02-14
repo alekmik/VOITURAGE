@@ -1,15 +1,15 @@
 ﻿@model Voiturage.Models.Utilisateur
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Modifiez";
 }
 
-<h1>Edit</h1>
+<h1>Modifiez</h1>
 
 <h4>Utilisateur</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="row blue_bg">
+    <div class="col-md-4 white_bg m-4 border w-75">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
@@ -34,16 +34,6 @@
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Salt" class="control-label"></label>
-                <input asp-for="Salt" class="form-control" />
-                <span asp-validation-for="Salt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Username" class="control-label"></label>
                 <input asp-for="Username" class="form-control" />
                 <span asp-validation-for="Username" class="text-danger"></span>
@@ -66,7 +56,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Retour</a>
 </div>
 
 @section Scripts {
