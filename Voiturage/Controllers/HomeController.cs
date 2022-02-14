@@ -20,7 +20,7 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         byte[] userid = new byte[4];
-        bool connected = HttpContext.Session.TryGetValue("User", out userid!);
+        bool connected = HttpContext.Session.TryGetValue("UserID", out userid!);
         if (connected)
             ViewData["User"] = _db.Utilisateurs.FirstOrDefault(x=>x.Id==BitConverter.ToInt32(userid));
         return View();

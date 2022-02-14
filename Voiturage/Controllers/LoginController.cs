@@ -60,6 +60,12 @@ namespace Voiturage.Controllers
             return View();
         }
 
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Remove("UserID");
+            return RedirectToAction("Index","Home");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Register(Utilisateur user)

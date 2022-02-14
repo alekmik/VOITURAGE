@@ -1,0 +1,53 @@
+﻿@model Utilisateur
+
+@if (Model == null)
+    {
+    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Identifiez vous
+                </a>
+                <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
+                    <li><a class="dropdown-item" asp-area="" asp-controller="Login" asp-action="Register">Inscription</a></li>
+                    <li><a class="dropdown-item" asp-area="" asp-controller="Login" asp-action="Index">Connexion</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    }
+
+    else if (Model.Admin)
+    {
+    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    @Model.Prenom @Model.Nom
+                </a>
+                <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
+                    <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="*">Liste des Trajets</a></li>
+                    <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="*">Liste des profils</a></li>
+                    <li><a class="dropdown-item" asp-area="" asp-controller="Login" asp-action="LogOut">Déconnexion</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    }
+    else
+    {
+    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    @Model.Prenom @Model.Nom
+                </a>
+                <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
+                    <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="*">Vos trajet</a></li>
+                    <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="*">Mon profil</a></li>
+                    <li><a class="dropdown-item" asp-area="" asp-controller="Login" asp-action="LogOut">Déconnexion</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+}
