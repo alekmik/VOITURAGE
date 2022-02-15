@@ -118,16 +118,18 @@ namespace Voiturage.Controllers
         // GET: Users/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(GetUser(id));
         }
 
         // POST: Users/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Utilisateur user)
         {
             try
             {
+                _dbConnect.Utilisateurs.Remove(user);
+                _dbConnect.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
