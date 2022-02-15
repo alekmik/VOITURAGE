@@ -24,7 +24,8 @@ namespace Voiturage.Controllers
 
         // GET: /<controller>/
         public IActionResult Index()
-        {    
+        {
+            
             return View();
         }
 
@@ -58,12 +59,6 @@ namespace Voiturage.Controllers
         public IActionResult Register()
         {
             return View();
-        }
-
-        public IActionResult LogOut()
-        {
-            HttpContext.Session.Remove("UserID");
-            return RedirectToAction("Index","Home");
         }
 
         [HttpPost]
