@@ -42,21 +42,7 @@ namespace Voiturage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Utilisateur user)
         {
-            //Verification de l'existance de la voiture dans la base de données.
-            List<Voiture> voitures = _dbConnect.Voitures.ToList();
-            var query = from c in voitures where c.Marque == user.Voiture.Marque && c.Modele == user.Voiture.Modele select c;
-            if(query.Count() > 0)
-            {
-                Voiture car = query.Single();
-                user.IdVoiture = car.Id;
-            }
-            else
-            {
-                Voiture car = user.Voiture;
-                _dbConnect.Voitures.Add(car);
-                _dbConnect.SaveChanges();
-                user.IdVoiture = car.Id;    
-            }
+            user = setCar(user);
             //Récupération du fichier de la photo
             var photoFile = Request.Form.Files;
             //Sécutisation du mot de passe.
@@ -66,8 +52,10 @@ namespace Voiturage.Controllers
             user.Password = ComputeSha256Hash(user.Password+user.Salt);
             try
             {
-                //Enregistrement de la photo dans le dossier images
-                user.Photo = ChargerFichier(photoFile[0], "");
+                if (photoFile.Count() > 0)
+                {
+                    user.Photo = ChargerFichier(photoFile[0], user.Photo);
+                }
                 //Enregistrement du nouvel utilisateur dans la base de données.
                 _dbConnect.Utilisateurs.Add(user);
                 if (_dbConnect.SaveChanges() > 0)
@@ -88,20 +76,40 @@ namespace Voiturage.Controllers
         // GET: Users/Edit/5
         public ActionResult Edit(int id)
         {
-
             return View(GetUser(id));
         }
 
         // POST: Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Utilisateur user)
         {
             try
-            {
-                return RedirectToAction(nameof(Index));
+            {   
+                user.Id = id;
+                //Récupére les anciennes données de l'utilisateur et complet l'objet utilisateur avec les données manquantes (password, salt). 
+                //Utilisateur oldUser = GetUser(id);
+                //user.Password = oldUser.Password;
+                //user.Salt = oldUser.Salt;
+                user = setCar(user);
+                //Récupération du fichier de la photo
+                var photoFile = Request.Form.Files;
+                //Enregistrement de la photo dans le dossier images
+                if (photoFile.Count() > 0)
+                {
+                    user.Photo = ChargerFichier(photoFile[0], user.Photo);
+                }
+                //Enregistrement du nouvel utilisateur dans la base de données.
+                _dbConnect.Utilisateurs.Update(user);
+                if (_dbConnect.SaveChanges() > 0)
+                {
+                    TempData["success"] = "Utilisateur ajouté";
+                    return RedirectToAction(nameof(Index));
+                }
+                TempData["error"] = "Erreur : Utilisateur non ajouté";
+                return View(user);
             }
-            catch
+            catch(Exception ex)
             {
                 return View();
             }
@@ -129,9 +137,18 @@ namespace Voiturage.Controllers
         }
         public Utilisateur GetUser(int id)
         {
-            Utilisateur user = _dbConnect.Utilisateurs.Find(id);
-            user.Voiture = _dbConnect.Voitures.Find(user.IdVoiture);
-            return (user);
+            Utilisateur user = new Utilisateur();
+            try
+            {
+                user = _dbConnect.Utilisateurs.Find(id);
+                user.Voiture = _dbConnect.Voitures.Find(user.IdVoiture);
+                return (user);
+            }
+            catch(Exception ex)
+            {
+                return user;
+            }
+            
         }
         //Charge la photo dans le dossier images
         private string ChargerFichier(IFormFile photoFile, string existFileName)
@@ -172,6 +189,22 @@ namespace Voiturage.Controllers
                 }
                 return builder.ToString();
             }
+        }
+
+        public Utilisateur setCar(Utilisateur user)
+        {
+            //Verifie si la voiture est dans la base de données et si elle n'est pas dans la BD l'enregistre.
+            Voiture car = _dbConnect.Voitures.FirstOrDefault(x => x.Modele == user.Voiture.Modele);
+            if (car != null)
+            {
+                user.IdVoiture = car.Id;
+            }
+            else
+            {
+                _dbConnect.Voitures.Add(user.Voiture);
+                _dbConnect.SaveChanges();
+            }
+            return user;
         }
     }
 }
