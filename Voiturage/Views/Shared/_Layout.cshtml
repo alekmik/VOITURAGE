@@ -1,7 +1,6 @@
 ﻿@{
-    Utilisateur ? user = ViewData["User"] as Utilisateur;
+    Utilisateur? user = ViewData["User"] as Utilisateur;
 }
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,13 +29,29 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Trajet">Publier Trajet</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="ListTrips">Vos trajets</a>
+                        </li>
                     </ul>
                 </div>
             </div>
             <div class="dropdown">
             </div>
-
-           @Html.Partial("_dropdownPartial", user)
+            <partial name="_dropdownPartial" model="user"></partial>
+            @*<div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Identifiez vous
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li><a class="dropdown-item" asp-action="Register" asp-controller="Login">Inscription</a></li>
+                            <li><a class="dropdown-item" asp-action="Index" asp-controller="Login">Connexion</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>*@
         </nav>
 
     </header>
