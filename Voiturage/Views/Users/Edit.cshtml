@@ -1,0 +1,74 @@
+﻿@model Voiturage.Models.Utilisateur
+
+@{
+    ViewData["Title"] = "Modifiez";
+}
+
+<h1>Modifiez</h1>
+
+<h4>Utilisateur</h4>
+<hr />
+<div class="row blue_bg">
+    <div class="col-md-4 m-4 w-75">
+        <form asp-action="Edit" enctype="multipart/form-data" class="blue_bg">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Password" />
+            <input type="hidden" asp-for="Salt" />
+            <input type="hidden" asp-for="Photo" />
+            <div class="form-group">
+                <label asp-for="Nom" class="control-label"></label>
+                <input asp-for="Nom" class="form-control" />
+                <span asp-validation-for="Nom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Prenom" class="control-label"></label>
+                <input asp-for="Prenom" class="form-control" />
+                <span asp-validation-for="Prenom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mail" class="control-label"></label>
+                <input asp-for="Mail" class="form-control" />
+                <span asp-validation-for="Mail" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Admin" /> @Html.DisplayNameFor(model => model.Admin)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  class="control-label">Photo</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile">Choisir une photo</label>
+                </div>
+                @*<span asp-validation-for="Photo" class="text-danger"></span>*@
+            </div>
+            <label>Voiture : </label>
+            <div class="form-group">
+                <label asp-for="Voiture.Marque" class="control-label"></label>
+                <input asp-for="Voiture.Marque" class="form-control"></input>
+            </div>
+            <div class="form-group">
+                <label asp-for="Voiture.Modele" class="control-label"></label>
+                <input asp-for="Voiture.Modele" class="form-control"></input>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Modifiez" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Retour</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

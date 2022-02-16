@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Utilisateur>
+@{
+     ViewData["Title"] = "Liste des utilisateurs";
+}
+<a class="btn btn-info" asp-controller="Users" asp-action="Create">+ Utilisateur</a>
+<table class="table-hover table table-striped table-sm" style="width:100%">
+    <thead>
+        <tr>
+            <th></th>
+            <th scope="col">@Html.DisplayNameFor(model => model.Username)</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var user in Model)
+        {
+            <tr style="height:100px">
+                <td> <img style="height:20%" class="rounded-circle border border-3 img-fluid" src="/images/@user.Photo"></td>
+                <td> @user.Username</td>
+                <td>@Html.ActionLink("Details", "Details", new { id = @user.Id })</td>
+                <td class="text-danger">@Html.ActionLink("Modifiez", "Edit", new { id = @user.Id })</td>
+                <td class="text-danger">@Html.ActionLink("Supprimez", "Delete", new { id = @user.Id })</td>  
+            </tr>
+        }
+    </tbody>
+</table>
+

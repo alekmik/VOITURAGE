@@ -1,0 +1,81 @@
+﻿@model Voiturage.Models.Trajet
+
+@{
+    ViewData["Title"] = "Modifiez";
+}
+
+<h1>Modifiez</h1>
+
+<h4>Trajet : </h4>
+<hr />
+<div class="row blue_bg">
+    <div class="col-md-4">
+        <form asp-action="Edit" class="blue_bg">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="HeureDepart" class="control-label"></label>
+                <input asp-for="HeureDepart" class="form-control" />
+                <span asp-validation-for="HeureDepart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HeureArrivee" class="control-label"></label>
+                <input asp-for="HeureArrivee" class="form-control" />
+                <span asp-validation-for="HeureArrivee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Prix" class="control-label"></label>
+                <input asp-for="Prix" class="form-control" />
+                <span asp-validation-for="Prix" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Place" class="control-label"></label>
+                <input asp-for="Place" class="form-control" />
+                <span asp-validation-for="Place" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdVilleDepart" class="control-label"></label>
+                <select asp-for="IdVilleDepart" class="form-control" asp-items="ViewBag.IdVilleDepart">
+                    @foreach(Ville ville in @ViewBag.Villes)
+                    {
+                        <option value="@ville.Id">@ville.Nom</option>
+                    }
+                </select>
+                <span asp-validation-for="IdVilleDepart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdVilleArrivee" class="control-label"></label>
+                <select asp-for="IdVilleArrivee" class="form-control" asp-items="ViewBag.IdVilleArrivee">
+                    @foreach(Ville ville in @ViewBag.Villes)
+                    {
+                        <option value="@ville.Id">@ville.Nom</option>
+                    }
+                </select>
+                <span asp-validation-for="IdVilleArrivee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdChauffeur" class="control-label"></label>
+                <select asp-for="IdChauffeur" class="form-control" asp-items="ViewBag.IdChauffeur">
+                    @foreach(Utilisateur user in @ViewBag.Users)
+                        {
+                            <option value="@user.Id">@user.Username</option>
+                        }
+                </select>
+                <span asp-validation-for="IdChauffeur" class="text-danger">
+                    
+                </span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Modifiez" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Retour</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

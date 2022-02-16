@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Voiturage.Models.Trajet>
+
+@{
+    ViewData["Title"] = "Liste des trajets";
+}
+
+<h1>Liste des trajets</h1>
+
+<p>
+    <a asp-action="Create" asp-controller="Trips" class="btn btn-info">+ Trajet</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HeureDepart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeureArrivee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VilleArrivee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Chauffeur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VilleDepart)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeureDepart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeureArrivee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VilleArrivee.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Chauffeur.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VilleDepart.Nom)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Modifiez</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Supprimez</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

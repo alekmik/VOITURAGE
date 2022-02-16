@@ -1,0 +1,63 @@
+﻿@model Voiturage.Models.Trajet
+
+@{
+    ViewData["Title"] = "Supprimez";
+}
+
+<h1>Supprimez</h1>
+
+<h3>Voulez-vous vraiment supprimez ce trajet?</h3>
+<div>
+    <h4>Trajet : </h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HeureDepart)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HeureDepart)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HeureArrivee)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HeureArrivee)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Prix)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Prix)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Place)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Place)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.VilleArrivee)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.VilleArrivee.Nom)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Chauffeur)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Chauffeur.Nom)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.VilleDepart)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.VilleDepart.Nom)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Supprimez" class="btn btn-danger" /> |
+        <a asp-action="Index">Retour</a>
+    </form>
+</div>
