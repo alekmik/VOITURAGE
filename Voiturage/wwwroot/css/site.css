@@ -43,3 +43,13 @@ body {
     line-height: 20px;
     text-decoration: none; /* remove underline from anchors */
 }
+/* icon */
+.note::after {
+    content: "";
+    background-image: url("images/star.svg");
+    background-size: 1rem 1rem;
+    display: inline-block;
+    position: relative;
+    height: 1rem;
+    width: 1rem;
+}

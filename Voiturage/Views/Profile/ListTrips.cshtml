@@ -35,13 +35,12 @@
                 <td>
                     @trajet.Place / @trajet.PlaceMax
                 </td>
-                <td>
-                    @*TODO
-                        si avis déja donné, le bouton montre l'avis
-                        si avis non donné, le bouton ouvre un formulaire
-                    *@
-                        @{
-                            //si avis deja donné
+                    @if(trajet.HeureDepart <= DateTime.Now)
+                    {
+                        <td>
+                        @*si avis déja donné, le bouton montre l'avis
+                        si avis non donné, le bouton ouvre un formulaire*@
+                        @{  //si avis deja donné
                             if(trajet.Avis != null && trajet.Avis.Count != 0)//si le trajet a des avis
                             {
                                 if(trajet.Avis.Any(a => a.IdNotant == (int)ViewData["UserID"]))//si le trajet a des avis de la part de l'utilisateur
@@ -57,7 +56,7 @@
                                 {
                                     
                                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AvisChauffeurModal-@trajet.Id">
-                                          Voir Avis
+                                            Voir Avis
                                         </button>
                                         <partial name="_AvisChauffeurModal" model="trajet"/>
                                     
@@ -76,7 +75,9 @@
                                 }
                         }
                     
-                </td>
+                    </td>
+                    } else {<td>-</td>}
+                
             </tr>
             
             
