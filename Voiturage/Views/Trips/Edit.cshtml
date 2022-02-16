@@ -35,18 +35,35 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdVilleDepart" class="control-label"></label>
-                <select asp-for="IdVilleDepart" class="form-control" asp-items="ViewBag.IdVilleDepart"></select>
+                <select asp-for="IdVilleDepart" class="form-control" asp-items="ViewBag.IdVilleDepart">
+                    @foreach(Ville ville in @ViewBag.Villes)
+                    {
+                        <option value="@ville.Id">@ville.Nom</option>
+                    }
+                </select>
                 <span asp-validation-for="IdVilleDepart" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdVilleArrivee" class="control-label"></label>
-                <select asp-for="IdVilleArrivee" class="form-control" asp-items="ViewBag.IdVilleArrivee"></select>
+                <select asp-for="IdVilleArrivee" class="form-control" asp-items="ViewBag.IdVilleArrivee">
+                    @foreach(Ville ville in @ViewBag.Villes)
+                    {
+                        <option value="@ville.Id">@ville.Nom</option>
+                    }
+                </select>
                 <span asp-validation-for="IdVilleArrivee" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdChauffeur" class="control-label"></label>
-                <select asp-for="IdChauffeur" class="form-control" asp-items="ViewBag.IdChauffeur"></select>
-                <span asp-validation-for="IdChauffeur" class="text-danger"></span>
+                <select asp-for="IdChauffeur" class="form-control" asp-items="ViewBag.IdChauffeur">
+                    @foreach(Utilisateur user in @ViewBag.Users)
+                        {
+                            <option value="@user.Id">@user.Username</option>
+                        }
+                </select>
+                <span asp-validation-for="IdChauffeur" class="text-danger">
+                    
+                </span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Modifiez" class="btn btn-primary" />

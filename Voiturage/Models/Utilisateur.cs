@@ -17,18 +17,24 @@ namespace Voiturage.Models
         }
 
         public int Id { get; set; }
-        [Display(Name = "Nom")]
+        [Display(Name = "Nom : ")]
+        [Required(ErrorMessage = "Veuillez sélectionner un nom.")]
         public string Nom { get; set; } = null!;
-        [Display(Name = "Prénom")]
+        [Display(Name = "Prénom : ")]
+        [Required(ErrorMessage = "Veuillez sélectionner un prénom.")]
         public string Prenom { get; set; } = null!;
-        [Display(Name = "e-mail")]
+        [Display(Name = "e-mail : ")]
+        [Required(ErrorMessage = "Veuillez saisir une adresse e-mail.")]
         public string Mail { get; set; } = null!;
+        [Display(Name = "Administrateur : ")]
         public bool Admin { get; set; }
         public string Password { get; set; } = null!;
         public string Salt { get; set; } = null!;
-        [Display(Name = "Pseudo")]
+        [Display(Name = "Pseudo : ")]
+        [Required(ErrorMessage = "Veuillez saisir un pseudo.")]
         public string Username { get; set; } = null!;
         public string Photo { get; set; } = null!;
+        [Display(Name = "Voiture : ")]
         public int? IdVoiture { get; set; } = null!;
 
         public virtual Voiture? Voiture { get; set; } = default!;
