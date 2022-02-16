@@ -45,21 +45,29 @@ namespace Voiturage.Controllers
         public ActionResult Create()
         {
             ViewBag.Villes = _cities;
+            ViewBag.Users = _users;
             return View();
         }
 
         // POST: Trips/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Trajet trajet)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                _dbConnect.Trajets.Add(trajet);
+                if (_dbConnect.SaveChanges() > 0)
+                {
+                    TempData["success"] = "Trajet ajouté";
+                    return RedirectToAction(nameof(Index));
+                }
+                TempData["error"] = "Erreur : Trajet non ajouté";
+                return View(trajet);
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                return View(trajet);
             }
         }
 
