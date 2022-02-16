@@ -1,0 +1,20 @@
+﻿@model BestRides
+
+<!-- Partie ticket annonce traget -->
+    <div class="card">
+        <div class="card-body">
+            <!-- Destination -->
+            <div class="">
+                <h6 class="card-title">
+                    <strong>
+                        <span>
+                            @Model.VilleDepart.Nom
+                            <i style="float:right"> @Model.prixMini € </i>
+                        </span>
+                    </strong>
+                </h6>
+                <i class="bi bi-three-dots-vertical"></i>
+                <h6 class="card-title"><strong>@Model.VilleArrivee.Nom</strong></h6>
+            </div>
+        </div>
+    </div>
