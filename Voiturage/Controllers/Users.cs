@@ -54,7 +54,7 @@ namespace Voiturage.Controllers
             {
                 if (photoFile.Count() > 0)
                 {
-                    user.Photo = ChargerFichier(photoFile[0], user.Photo);
+                    user.Photo = ChargerFichier(photoFile[0], "");
                 }
                 //Enregistrement du nouvel utilisateur dans la base de données.
                 _dbConnect.Utilisateurs.Add(user);
