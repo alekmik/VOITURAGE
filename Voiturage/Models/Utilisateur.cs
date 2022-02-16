@@ -26,13 +26,16 @@ namespace Voiturage.Models
         [Display(Name = "e-mail : ")]
         [Required(ErrorMessage = "Veuillez saisir une adresse e-mail.")]
         public string Mail { get; set; } = null!;
-        [Display(Name = "Administrateur : ")]
+        [Display(Name = "Administrateur")]
         public bool Admin { get; set; }
+        [Display(Name = "Mot de passe : ")]
+        [Required(ErrorMessage = "Veuillez saisir un mot de passe.")]
         public string Password { get; set; } = null!;
         public string Salt { get; set; } = null!;
         [Display(Name = "Pseudo : ")]
         [Required(ErrorMessage = "Veuillez saisir un pseudo.")]
         public string Username { get; set; } = null!;
+        [Display(Name = "Photo : ")]
         public string Photo { get; set; } = null!;
         [Display(Name = "Voiture : ")]
         public int? IdVoiture { get; set; } = null!;

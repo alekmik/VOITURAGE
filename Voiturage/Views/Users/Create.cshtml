@@ -6,11 +6,11 @@
 
 <h1>Ajoutez</h1>
 
-<h4>Utilisateur</h4>
+<h4>Utilisateur : </h4>
 <hr />
 <div class="row blue_bg">
-    <div class="col-md-4 white_bg m-3   ">
-        <form asp-action="Create" enctype="multipart/form-data">
+    <div class="col-md-4 m-3   ">
+        <form asp-action="Create" enctype="multipart/form-data" class="blue_bg">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Nom" class="control-label"></label>
@@ -48,11 +48,11 @@
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Voiture.Marque" class="control-label">Marque de voiture</label>
+                <label asp-for="Voiture.Marque" class="control-label">Marque de voiture : </label>
                 <input asp-for="Voiture.Marque" class="form-control"></input>
             </div>
             <div class="form-group">
-                <label asp-for="Voiture.Modele" class="control-label">Model de voiture</label>
+                <label asp-for="Voiture.Modele" class="control-label">Model de voiture : </label>
                 <input asp-for="Voiture.Modele" class="form-control"></input>
             </div>
             <div class="form-group">
@@ -64,7 +64,7 @@
                     <span asp-validation-for="Photo" class="text-danger"></span>
             </div>
             <div class="form-group mt-1">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Ajoutez" class="btn btn-primary m-1" />
             </div>
         </form>
     </div>
