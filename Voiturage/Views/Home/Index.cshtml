@@ -1,5 +1,81 @@
-﻿@using System.Web;
+﻿@model SearchViewModel
+
 @{
-    ViewData["Title"] = "Home Page";
-    Utilisateur ? user = ViewData["User"] as Utilisateur;
+    ViewData["Title"] = "Voiturage";
+    var cities = ViewData["Cities"] as IEnumerable<Ville>;
+    var bestRides = ViewData["BestRides"] as IEnumerable<BestRides>;
 }
+
+<div id="HomeSearchBar" class="bg-image position-relative">
+    <h1 class="text-center mt-3 ">Un vaste choix de trajets à petits prix</h1>
+    <form method="post" asp-controller="Search" id="homeSearchForm" class="position-absolute bottom-0 start-50 translate-middle-x mb-2">
+        <div class="row align-items-center">
+            <div class="col-12 col-lg mb-2">
+                <select onchange="let option = document.getElementById('startOption1'); if (option != null) { option.remove() }" class="form-select ms-lg-3 align-self-end" asp-for="IdVilleDepart">
+                    <option id="startOption1" >Départ</option>
+                    @foreach (Ville city in cities)
+                    {
+                        <option value="@city.Id">@city.Nom</option>
+                    }
+                </select>
+            </div>
+            <div class="col-12 col-lg mb-2">
+                <select onchange="let option = document.getElementById('startOption2'); if (option != null) { option.remove() }" class="form-select align-self-end" asp-for="IdVilleArrivee">
+                    <option id="startOption2">Destination</option>
+                    @foreach (Ville city in cities)
+                    {
+                        <option value="@city.Id">@city.Nom</option>
+                    }
+                </select>
+            </div>
+            <div class="col">
+                <input asp-for="DateDepart" type="date" class="ms-5 ms-lg-0"/>
+            </div>
+            <div class="col">
+                <i class="bi bi-people-fill text-light"></i>
+                <input type="number" class="form-control passengers d-inline" asp-for="PlacesRequises" value="1" min="1" max="8"/>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-light">Rechercher</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="row mt-3">
+    <div class="col-12 col-sm-4">
+        <i class="bi bi-cash-stack"></i>        <h6>
+            Vos trajets préférés à petits prix
+        </h6>
+        <p style="font-size:small" class="text-secondary">
+            Ou que vous alliez, trouvez le trajet ideal parmi notre large choix de destinations à petits prix.
+        </p>
+    </div>
+    <div class="col-12 col-sm-4">
+        <i class="bi bi-shield-check"></i>
+        <h6>Voyagez en toute confiance</h6>
+        <p style="font-size:small" class="text-secondary">
+            Nous prenons le temps qu'il taut pour connaitre nos membres et nos partenaires. Nous verifions les avis et les profils avec extrême vigilence. Vous savez donc avec qui vous allez voyager pour reserver en toute confiance sur notre plateforme securisée.
+        </p>
+
+    </div>
+    <div class="col-12 col-sm-4">
+        <i class="bi bi-lightning-fill text-center"></i>
+        <h6>Recherchez, cliquez et réservez !</h6>
+        <p style="font-size:small" class="text-secondary">
+            Reserver un trajet devient encore plus simple ! Facile d'utilisation et dotée de technologies avancées, notre appli vous permet de reserver un trajet à proximité en un rien de temps.
+        </p>
+
+    </div>
+</div>
+
+<div style="padding:3%">
+    <h4 class="text-center">Où allez vous ?</h4>
+    <div class="row ">
+        @foreach (BestRides ride in bestRides)
+        {
+            <div class="col-12 col-sm-4 mb-3" onclick="location.href='/Search'" style="cursor:pointer">
+                @Html.Partial("_annonceSimplifiee", ride)
+            </div>
+        }
+    </div>
+</div>

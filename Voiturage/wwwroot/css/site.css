@@ -43,3 +43,38 @@ body {
     line-height: 20px;
     text-decoration: none; /* remove underline from anchors */
 }
+
+
+#HomeSearchBar {
+    background-image: url('images/image_accueil.jpeg');
+    padding-bottom: 25%;
+    background-size: cover;
+    background-position: 0% 40%;
+    font-family: 'Poppins', sans-serif;
+}
+
+#HomeSearchBar h1
+{
+    color:rgb(67, 121, 191)
+}
+@media only screen and (max-width: 992px) {
+    #HomeSearchBar {
+        padding-bottom: 55%;
+    }
+}
+
+#homeSearchForm {
+    display: grid;
+    width: 90%;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    padding: 8px;
+    background-color: rgba(67, 121, 191,.8)
+}
+
+.passengers {
+    width:60px;
+    height:30px;
+}

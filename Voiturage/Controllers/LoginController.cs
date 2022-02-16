@@ -24,7 +24,12 @@ namespace Voiturage.Controllers
 
         // GET: /<controller>/
         public IActionResult Index()
-        {    
+        {
+            if(HttpContext.Session.Keys.Contains("UserID"))
+            {
+                TempData["Error"] = "Vous êtes déjà connecté.";
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -32,6 +37,11 @@ namespace Voiturage.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Index(LoginViewModel user)
         {
+            if (HttpContext.Session.Keys.Contains("UserID"))
+            {
+                TempData["Error"] = "Vous êtes déjà connecté.";
+                return RedirectToAction("Index", "Home");
+            }
             Utilisateur ? theUser = _db.Utilisateurs.FirstOrDefault(x => x.Username == user.Username);
             if(theUser==null)
             {

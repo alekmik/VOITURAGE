@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Voiturage.Models;
 using Voiturage.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Voiturage.Controllers;
 
@@ -23,6 +24,8 @@ public class HomeController : Controller
         bool connected = HttpContext.Session.TryGetValue("UserID", out userid!);
         if (connected)
             ViewData["User"] = _db.Utilisateurs.FirstOrDefault(x=>x.Id==BitConverter.ToInt32(userid));
+        ViewData["Cities"] = _db.Villes;
+        ViewData["BestRides"] = _db.Trajets.Where(x => x.HeureDepart > DateTime.Now.AddYears(-5)).GroupBy(x => new { x.IdVilleDepart, x.IdVilleArrivee }).Select(x => new BestRides { VilleDepart = x.FirstOrDefault().VilleDepart, VilleArrivee = x.FirstOrDefault().VilleArrivee, prixMini = x.Min(x => x.Prix), nbTrajetPropose = x.Count() }).OrderByDescending(x => x.nbTrajetPropose).Take(3);
         return View();
     }
 
