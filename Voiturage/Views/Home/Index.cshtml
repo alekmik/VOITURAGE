@@ -1,10 +1,14 @@
-﻿@model SearchViewModel
+﻿
+@model SearchViewModel
 
 @{
     ViewData["Title"] = "Voiturage";
     var cities = ViewData["Cities"] as IEnumerable<Ville>;
     var bestRides = ViewData["BestRides"] as IEnumerable<BestRides>;
+    ViewData["Title"] = "Home Page";
+    ViewData["userID"] = Context.Session.GetInt32("UserID");
 }
+
 
 <div id="HomeSearchBar" class="bg-image position-relative">
     <h1 class="text-center mt-3 ">Un vaste choix de trajets à petits prix</h1>

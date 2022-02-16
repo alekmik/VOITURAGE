@@ -1,0 +1,20 @@
+﻿@model Trajet
+
+<!-- Modal -->
+<div class="modal fade" id="AvisGivenDisplayModal-@Model.Id" tabindex="-1" aria-labelledby="AvisGivenDisplayModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="AvisGivenDisplayModalLabel">Avis</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="note">@Model.Avis.FirstOrDefault( a => a.IdNotant == (int)ViewData["UserId"]).Note</p>
+        <p class="modal-commentaire">@Model.Avis.FirstOrDefault( a => a.IdNotant == (int)ViewData["UserId"]).Commentaire</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>

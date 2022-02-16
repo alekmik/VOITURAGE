@@ -30,6 +30,7 @@ namespace Voiturage.Controllers
                 TempData["Error"] = "Vous êtes déjà connecté.";
                 return RedirectToAction("Index", "Home");
             }
+
             return View();
         }
 
@@ -59,7 +60,8 @@ namespace Voiturage.Controllers
 
             
             TempData["Success"] = "Bienvenue, " + theUser.Username;
-            HttpContext.Session.Set("UserID",BitConverter.GetBytes(theUser.Id));
+            HttpContext.Session.SetInt32("userid", theUser.Id);
+            HttpContext.Session.SetInt32("isadmin", theUser.Admin ? 1 :0 );
             return RedirectToAction("Index","Home");
 
 
@@ -68,12 +70,6 @@ namespace Voiturage.Controllers
         public IActionResult Register()
         {
             return View();
-        }
-
-        public IActionResult LogOut()
-        {
-            HttpContext.Session.Remove("UserID");
-            return RedirectToAction("Index","Home");
         }
 
         [HttpPost]
@@ -122,7 +118,12 @@ namespace Voiturage.Controllers
             return RedirectToAction("Index");
         }
 
-
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Remove("userid");
+            HttpContext.Session.Remove("isadmin");
+            return RedirectToAction("Index", "Home");
+        }
 
 
         static string ComputeSha256Hash(string rawData)

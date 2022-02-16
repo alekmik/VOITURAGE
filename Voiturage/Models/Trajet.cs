@@ -19,6 +19,7 @@ namespace Voiturage.Models
         public int IdVilleDepart { get; set; }
         public int IdVilleArrivee { get; set; }
         public int IdChauffeur { get; set; }
+        public int PlaceMax { get; set; }
 
         public virtual Ville VilleArrivee { get; set; } = null!;
         public virtual Utilisateur Chauffeur { get; set; } = null!;

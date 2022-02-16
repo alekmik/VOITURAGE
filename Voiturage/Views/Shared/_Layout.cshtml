@@ -1,8 +1,4 @@
-﻿@{
-    Utilisateur ? user = ViewData["User"] as Utilisateur;
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -30,19 +26,19 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        @if (user != null)
+                        @if (Context.Session.GetInt32("isadmin") == 0)
                         {
                             <li class="nav-item align-self-center">
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Trajet" style="color:deepskyblue"><i class="bi bi-plus-circle"></i>Publier un trajet</a>
                             </li>
                         }
+
                     </ul>
                 </div>
             </div>
             <div class="dropdown">
             </div>
-
-           @Html.Partial("_dropdownPartial", user)
+            <partial name="_dropdownPartial"></partial>
         </nav>
 
     </header>

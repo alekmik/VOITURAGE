@@ -1,0 +1,23 @@
+﻿@model Trajet
+<!-- Modal -->
+<div class="modal fade" id="AvisChauffeurModal-@Model.Id" tabindex="-1" aria-labelledby="AvisChauffeurModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="AvisChauffeurModalLabel">Avis</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        @*Model.Id*@
+        @foreach(Avis avis in Model.Avis)
+                {
+                    <p class="note">@avis.Note</p>
+                    <p class="modal-commentaire">@avis.Commentaire</p>
+                }
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>

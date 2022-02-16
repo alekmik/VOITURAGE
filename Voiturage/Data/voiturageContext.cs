@@ -92,6 +92,8 @@ namespace Voiturage.Data
 
                 entity.Property(e => e.Prix).HasColumnName("prix");
 
+                entity.Property(e => e.PlaceMax).HasColumnName("PlaceMax");
+
                 entity.HasOne(d => d.VilleArrivee)
                     .WithMany(p => p.TrajetALarrivee)
                     .HasForeignKey(d => d.IdVilleArrivee)

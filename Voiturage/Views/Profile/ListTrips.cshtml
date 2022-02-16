@@ -1,0 +1,90 @@
+﻿@model Utilisateur
+
+<h1>@ViewData["Title"]</h1>
+
+
+<div>
+@*Trips list for current user*@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Départ
+            </th>
+            <th>
+                Arrivée
+            </th>
+            <th>
+                Places libres / Max
+            </th>
+            <th>
+                Avis
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Trajet trajet in ViewBag.trajets)
+        {
+            <tr>
+                <td>
+                    @trajet.VilleDepart.Nom  @trajet.HeureDepart
+                </td>
+                <td>
+                    @trajet.VilleArrivee.Nom  @trajet.HeureArrivee
+                </td>
+                <td>
+                    @trajet.Place / @trajet.PlaceMax
+                </td>
+                    @if(trajet.HeureDepart <= DateTime.Now)
+                    {
+                        <td>
+                        @*si avis déja donné, le bouton montre l'avis
+                        si avis non donné, le bouton ouvre un formulaire*@
+                        @{  //si avis deja donné
+                            if(trajet.Avis != null && trajet.Avis.Count != 0)//si le trajet a des avis
+                            {
+                                if(trajet.Avis.Any(a => a.IdNotant == (int)ViewData["UserID"]))//si le trajet a des avis de la part de l'utilisateur
+                                {
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#AvisGivenDisplayModal-@trajet.Id">
+                                        Voir Avis
+                                    </button>
+                                    <partial name="_AvisGivenDisplayModal" model="trajet"/>
+                                }
+                                //si l'utilisateur est le chauffeur
+                                else if(trajet.IdChauffeur == (int)ViewData["UserID"])
+                                {
+                                    
+                                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AvisChauffeurModal-@trajet.Id">
+                                            Voir Avis
+                                        </button>
+                                        <partial name="_AvisChauffeurModal" model="trajet"/>
+                                    
+                                }
+                            }
+                            //si avis non donné et utilisateur est passager
+                            else if(trajet.IdChauffeur != (int)ViewData["UserID"])
+                            {
+                                <a class="btn-primary btn" asp-controller="Avis" asp-action="CreateAvis"
+                                asp-route-idTrajet="@trajet.Id">Donner un avis</a>
+                            }else
+                                {
+                                    <div>
+                                        Pas d'avis reçu
+                                    </div>
+                                }
+                        }
+                    
+                    </td>
+                    } else {<td>-</td>}
+                
+            </tr>
+            
+            
+            
+            }
+    </tbody>
+</table>
+
+</div>
+@*<partial name="_AvisModelPartial" model="@ViewData["Avis"]"/>*@
