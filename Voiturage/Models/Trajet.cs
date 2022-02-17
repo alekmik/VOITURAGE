@@ -39,7 +39,19 @@ namespace Voiturage.Models
         [Required(ErrorMessage = "Veuillez selectionner le chauffeur du trajet.")]
         public int IdChauffeur { get; set; }
         [Display(Name = "Ville d'arrivée : ")]
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         public virtual Ville ? VilleArrivee { get; set; } = null!;
+=======
+        public virtual Ville? VilleArrivee { get; set; } = null!;
+>>>>>>> Stashed changes
+=======
+        public virtual Ville? VilleArrivee { get; set; } = null!;
+>>>>>>> Stashed changes
+=======
+        public virtual Ville? VilleArrivee { get; set; } = null!;
+>>>>>>> Stashed changes
         public virtual Utilisateur ? Chauffeur { get; set; } = null!;
         [Display(Name = "Ville de départ : ")]
         public virtual Ville ? VilleDepart { get; set; } = null!;

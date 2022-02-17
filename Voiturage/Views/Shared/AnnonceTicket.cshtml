@@ -34,28 +34,44 @@
         <div>
             <!-- Nom du conducteur -->
             <p class="card-text">
-                <span>@Model.Chauffeur.Prenom @Model.Chauffeur.Nom
-                    <i style="float:right" title="Modèle de véhicule">@Model.Chauffeur.Voiture.Marque @Model.Chauffeur.Voiture.Modele</i>
-                </span>
+                <span>
+                    @Model.Chauffeur.Prenom @Model.Chauffeur.Nom
+                    @if (Model.Chauffeur.Voiture != null)
+                    {
+                        <i style="float:right" title="Modèle de véhicule">
+                            @Model.Chauffeur.Voiture.Marque @Model.Chauffeur.Voiture.Modele
+                        </i>
+                    }
+                    </span>
             </p>
             <p class="card-text">
                 <small>
                     <span>
-                        @{
-                            float note=4.5f; /* Note de l'user */
-                        }
-                          @for (int i = 0 ; i<Math.Floor(note);i++)
-                        {   /* Etoile remplie  */
-                            <i class="bi bi-star-fill" style="color:#FFC043"></i>
-                        } @if (note>Math.Floor(note)) {
-                            /* Etoile semi-remplie  */
-                            <i class="bi bi-star-half" style="color:#FFC043"></i>
-                        } @for (int i = (int)Math.Ceiling(note);i<5;i++)
-                        {   /* Etoile non-remplie  */
-                            <i class="bi bi-star" style="color:#FFC043"></i>
-                        }
-                        @note / 5
 
+                        @if (Model.Avis.Count() > 4)
+                        {
+
+                            double note = Math.Round(Model.Avis.Average(x => x.Note) * 2, MidpointRounding.AwayFromZero) / 2; /* Note du user */
+
+                            @for (int i = 0; i < Math.Floor(note); i++)
+                            {   /* Etoile remplie  */
+                                <i class="bi bi-star-fill" style="color:#FFC043"></i>
+                            }
+                            @if (note > Math.Floor(note))
+                            {
+                                /* Etoile semi-remplie  */
+                                <i class="bi bi-star-half" style="color:#FFC043"></i>
+                            }
+                            @for (int i = (int)Math.Ceiling(note); i < 5; i++)
+                            {   /* Etoile non-remplie  */
+                                <i class="bi bi-star" style="color:#FFC043"></i>
+                            }
+                            <text>@note / 5</text>
+                            }
+                        else
+                        {
+                            <i>L'utilisateur n'a pas assez d'avis</i>
+                        }
                         <!-- Nombre de passagers dispo -->
                         <i class="bi bi-people-fill" style="float:right" title="Nombre de passagers max"> @Model.Place / @Model.PlaceMax</i>
                     </span>

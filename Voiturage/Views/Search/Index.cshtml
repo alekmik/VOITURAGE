@@ -1,9 +1,19 @@
 ﻿@model IEnumerable<Trajet>
 
 
-@foreach(Trajet trajet in Model)
+<h1 class="text-center">Résultat de la recherche</h1>
+@if (!Model.Any())
 {
-    <div>
-        @trajet.Id
+    <div class="alert alert-danger" role="alert">
+        Aucun résultat ne correspond à votre recherche.
     </div>
 }
+
+<div class="row">
+    @foreach (Trajet trajet in Model)
+    {
+    <div class="col">
+        @Html.Partial("AnnonceTicket", trajet)
+    </div>
+    }
+</div>
