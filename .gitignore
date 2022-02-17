@@ -407,5 +407,3 @@ ASALocalRun/
 
 #appsettings differ for every contributor
 appsettings.json
-*.csproj
-obj
