@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\css\icones\**" />
+    <Compile Remove="wwwroot\icones\**" />
+    <Content Remove="wwwroot\css\icones\**" />
+    <Content Remove="wwwroot\icones\**" />
+    <EmbeddedResource Remove="wwwroot\css\icones\**" />
+    <EmbeddedResource Remove="wwwroot\icones\**" />
+    <None Remove="wwwroot\css\icones\**" />
+    <None Remove="wwwroot\icones\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Microsoft.EntityFrameworkCore" />
     <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
     <None Remove="Microsoft.EntityFrameworkCore.Tools" />

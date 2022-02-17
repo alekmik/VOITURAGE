@@ -1,0 +1,67 @@
+﻿@model Trajet //Recupération du model Trajet
+
+<!-- Partie ticket annonce traget -->
+<div class="card " style="width: 30rem;">
+  <div class="card-body">
+    <!-- Destination -->
+    <div class="">
+        <h6 class="card-title">
+            <strong>
+                <span>
+                    <!-- Heure de départ / Ville de départ / Prix -->
+                    18:00@*@Model.HeureDepart.ToString("HH:mm")*@
+                    @Model.VilleDepart.Nom
+                    <i style="float:right"> @Model.Prix € </i>
+                </span>
+            </strong>
+        </h6>
+        <i class="bi bi-three-dots-vertical"></i> <!-- Lien entre ville de depart & d'arrivee -->
+        <!-- Ville d'arrivee -->
+        <h6 class="card-title">
+            <strong>
+                <span>
+                    23:00 @Model.VilleArrivee.Nom
+                    <i style="float:right"> 20 février 2022 </i>
+                </span>
+            </strong>
+        </h6>
+    </div><br/>
+
+    <!-- profil du conducteur -->
+    <div>
+        <!-- Image de profil -->
+        <img src="/images/1stuser.jpg" width="50" height="50" style="border-radius:50px"/>
+        <div>
+            <!-- Nom du conducteur -->
+            <p class="card-text">
+                <span>@Model.Chauffeur.Prenom @Model.Chauffeur.Nom
+                    <i style="float:right" title="Modèle de véhicule">@Model.Chauffeur.Voiture.Marque @Model.Chauffeur.Voiture.Modele</i>
+                </span>
+            </p>
+            <p class="card-text">
+                <small>
+                    <span>
+                        @{
+                            float note=4.5f; /* Note de l'user */
+                        }
+                          @for (int i = 0 ; i<Math.Floor(note);i++)
+                        {   /* Etoile remplie  */
+                            <i class="bi bi-star-fill" style="color:#FFC043"></i>
+                        } @if (note>Math.Floor(note)) {
+                            /* Etoile semi-remplie  */
+                            <i class="bi bi-star-half" style="color:#FFC043"></i>
+                        } @for (int i = (int)Math.Ceiling(note);i<5;i++)
+                        {   /* Etoile non-remplie  */
+                            <i class="bi bi-star" style="color:#FFC043"></i>
+                        }
+                        @note / 5
+
+                        <!-- Nombre de passagers dispo -->
+                        <i class="bi bi-people-fill" style="float:right" title="Nombre de passagers max"> @Model.Place / @Model.PlaceMax</i>
+                    </span>
+                </small>
+            </p> 
+        </div>
+    </div>
+  </div>
+</div>

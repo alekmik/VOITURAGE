@@ -10,8 +10,10 @@ namespace Voiturage.Models
         {
             Avis = new HashSet<Avis>();
             Passagers = new HashSet<Utilisateur>();
+            /*Trajet = new HashSet<Trajet>();*/
         }
 
+        [Key]
         public int Id { get; set; }
         [Display(Name ="Heure de départ : ")]
         [Required(ErrorMessage = "Veuillez saisir une heure de départ.")]

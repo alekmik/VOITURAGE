@@ -1,0 +1,177 @@
+﻿@model Trajet
+@{
+    ViewData["Title"] = "Publier un trajet";
+    var cities = ViewData["AllTheCities"] as IEnumerable<Ville>;
+}
+
+<div class="m-5 d-flex justify-content-between">
+    <h2> Devenez conducteur Voiturage et faites des économies en partageant vos frais de voyage </h2>
+</div>
+
+<!-- Section formulaire de publication de l'annonce -->
+<section id="lienSectionForm">
+<!-- creer la balise form + actions pour envoyer sur la méthode add -->
+    <form method="post" asp-action="Add" >
+        <div class="container mb-5">
+            <div class="row">
+                <div class="col-lg-6">
+                    <label asp-for="IdVilleDepart"></label>
+                    <select asp-for="IdVilleDepart" class="form-select form-control">
+                     <!-- creation boucle (récuperation données ville ) -->
+                    @foreach(@*Ville = objet (cet objet = string, int...)*@Ville @*nom de la variable*@ville in @*appel la variable créé plus haut (variable qui recupere les données via le controleur*@cities)
+                    {
+                        <option value="@ville.Id">@ville.Nom</option>
+                        @* l'arobase ville récupère l'id du model "Ville" *@
+                    }
+                    </select>
+                    <span asp-validation-for="IdVilleDepart" class="text-danger"></span><br />
+
+                    <label asp-for="IdVilleArrivee"></label>
+                    <select asp-for="IdVilleArrivee" class="form-select form-control">
+                     <!-- creation boucle (récuperation données ville ) -->
+                    @foreach(@*Ville = objet (cet objet = string, int...)*@Ville @*nom de la variable*@ville in @*appel la variable créé plus haut (variable qui recupere les données via le controleur*@cities)
+                    {
+                        <option value="@ville.Id">@ville.Nom</option>
+                        @* l'arobase ville récupère l'id du model "Ville" *@
+                    }
+                    </select>
+                    <span asp-validation-for="IdVilleArrivee" class="text-danger"></span><br />
+
+                    <label asp-for="PlaceMax"></label>
+                    <input asp-for="PlaceMax" class="form-control"  name="Vday" type="number" min=1 max=8/> <!-- Nombre de passagers max = 8 -->
+                    <span asp-validation-for="PlaceMax" class="text-danger"></span><br />
+                    <input type="hidden" asp-for="Place" value="1"/>
+
+                    <label asp-for="HeureDepart"></label>
+                    <input asp-for="HeureDepart" class="form-control" type='date' type="datetime-local"/>
+                    <span asp-validation-for="HeureDepart" class="text-danger"></span><br />
+
+
+                    <label asp-for="HeureArrivee"></label>
+                    <input asp-for="HeureArrivee" class="form-control" />
+                    <span asp-validation-for="HeureArrivee" class="text-danger"></span><br />
+
+                    <label asp-for="Prix"></label>
+                    <input asp-for="Prix" class="form-control" type="number" min = 5 max=765/>
+                    <span asp-validation-for="Prix" class="text-danger"></span><br />   
+
+                    <button class="btn btn-outline-primary" type="submit">Publier</button>
+                </div>
+                <div class="col-lg-6">
+                    <img src="/images/istockphoto-1275844624-612x612.jpg" class="img-fluid " alt="Responsive image">
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
+
+<!-- Section objectif de Voiturage -->
+<section>
+    <h3 class="pt-5 pb-4 d-flex justify-content-center"> Tout simplement le meilleur du covoiturage avec Voiturage </h3>
+    <div class="row row-cols-1 row-cols-md-3 g-4 pt-2 pb-4 bg-info bg-opacity-25" style="border-radius:15px">
+      <div class="col">
+        <div class="card border-light">
+          <div class="card-body">
+            <h5 class="card-title">Faites des économies</h5>
+            <p class="card-text">Partagez vos frais de voyages et économisez sur chacun de vos trajets. Et pour votre 1er trajet Voiturage avec un passager, recevez 25 € de carte essence ou 40 € de carte lavage.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card border-light">
+          <div class="card-body">
+            <h5 class="card-title">Rejoignez une communauté de confiance</h5>
+            <p class="card-text">Nous connaissons chacun de nos membres: passagers et conducteurs. Comment ? Nous vérifions avis, profils et pièces d’identité. Vous savez ainsi avec qui vous voyagez.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card border-light">
+          <div class="card-body">
+            <h5 class="card-title">Covoiturez en toute simplicité</h5>
+            <p class="card-text">Notre technologie vous facilite la vie tout au long de votre expérience Voiturage pour trouver des passagers facilement, les retrouver directement sur votre route et échanger le temps d'un trajet.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<!-- Section informations à l'utilisateur -->
+<section class="pb-4" id="sectionInformationForUser">
+    <h3 class="text-center pt-5">Publiez votre trajet en quelques minutes seulement</h3>
+    <div class="d-flex position-relative">
+    <img src="/images/image-acceuil-2-removebg-preview.png" style="width:300px; height:250px"/>
+      <div class="m-4">
+        <h5>Créez votre compte sur Voiturage</h5>
+        <p>Ajoutez votre photo, quelques lignes sur vous et votre numéro de téléphone pour plus de confiance avec les membres.</p>
+        <a href="#lienSectionForm" class="position-relative pt-2">
+            <button type="button" class="btn btn-info btn-lg">Publier un trajet</button>
+        </a>
+      </div>
+      
+
+    </div>
+</section>
+
+<!-- Section centre d'aide -->
+<section class="pt-4" id="sectionHelpCenter">
+    <h3 style="text-align:center" class="pb-3">Mes 1ers pas de conducteur avec le Centre d'Aide</h3>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Comment fixer le prix de mon trajet ?</h6>
+                    <p class="card-text">
+                        <small>
+                            Lorsque vous publiez un trajet, nous vous recommandons un prix par place. Ce montant vous permet de partager vos frais de trajet et prend en compte vos points de départ et d’arrivée et le coût du trajet (carburant, usure du véhicule, etc.).
+                            En adaptant nos prix en fonction de la fréquentation des passager·ère·s sur certains axes, notre objectif est d’équilibrer les prix en fonction de la demande.
+                            L'ajout d'étapes est indisponible pour le moment.
+                            Si vous souhaitez appliquer un prix différent, vous pouvez l’ajuster, dans une certaine limite, en cliquant sur les boutons ⌄ ou ⌃.
+                        </small>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Je souhaite annuler mon trajet publié en tant que conducteur·rice.</h6>
+                    <p class="card-text">
+                        <small>
+                            Annuler un trajet ne prend que quelques instants. C'est encore plus rapide si vous n’avez pas encore reçu de réservations.
+                            Rendez-vous sur Vos trajets pour sélectionner celui que vous devez annuler.
+                            Informez rapidement vos passager·ère·s de votre décision pour leur laisser le temps de réserver un autre trajet. Nous leur enverrons un e-mail et un SMS afin de confirmer l’annulation et le remboursement.
+                            Une annulation n'entraîne pas de pénalités. Toutefois, nous pouvons suspendre les profils de conducteur·rice·s qui annulent leurs trajets trop souvent, nuisant ainsi au bon fonctionnement de Voiturage.
+                        </small>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Où puis-je retrouvé mon trajet ?</h6>
+                    <p class="card-text">
+                        <small>
+                            Votre publication sera disponible dans Vos trajets. Vous y retrouverais la liste de vos trajets terminés, en cours et à venir.
+                        </small>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Quand vais-je recevoir mon paiement ?</h6>
+                    <p class="card-text">
+                        <small>
+                            Nous procédons à votre paiement par virement 48 heures après le trajet, si celui-ci s’est déroulé comme prévu. Le montant devrait s’afficher sur votre compte sous 1 à 5 jours ouvrés (hors week-end et jours fériés).
+                            Si votre paiement n’apparaît pas dans votre profil.
+                        </small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
