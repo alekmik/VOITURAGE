@@ -39,10 +39,10 @@ namespace Voiturage.Models
         [Required(ErrorMessage = "Veuillez selectionner le chauffeur du trajet.")]
         public int IdChauffeur { get; set; }
         [Display(Name = "Ville d'arrivée : ")]
-        public virtual Ville VilleArrivee { get; set; } = null!;
-        public virtual Utilisateur Chauffeur { get; set; } = null!;
+        public virtual Ville ? VilleArrivee { get; set; } = null!;
+        public virtual Utilisateur ? Chauffeur { get; set; } = null!;
         [Display(Name = "Ville de départ : ")]
-        public virtual Ville VilleDepart { get; set; } = null!;
+        public virtual Ville ? VilleDepart { get; set; } = null!;
         public virtual ICollection<Avis> Avis { get; set; }
 
         public virtual ICollection<Utilisateur> Passagers { get; set; }
