@@ -22,12 +22,11 @@ namespace Voiturage.Controllers
 
         public IActionResult ListTrips()
         {
-            byte[] userid = new byte[4];
-            bool connected = HttpContext.Session.TryGetValue("UserID", out userid);
-            if (connected)
+            int? userid = HttpContext.Session.GetInt32("userid");
+            if (userid!=null)
             {
-                ViewData["User"] = _voiturageContext.Utilisateurs.FirstOrDefault(x => x.Id == BitConverter.ToInt32(userid));
-                ViewData["UserID"] = BitConverter.ToInt32(userid);
+                ViewData["User"] = _voiturageContext.Utilisateurs.FirstOrDefault(x => x.Id == userid);
+                ViewData["UserID"] = userid;
             }
             /*------------------------------*/
             ViewData["Title"] = "Vos trajets";

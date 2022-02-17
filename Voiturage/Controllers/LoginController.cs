@@ -62,6 +62,10 @@ namespace Voiturage.Controllers
             TempData["Success"] = "Bienvenue, " + theUser.Username;
             HttpContext.Session.SetInt32("userid", theUser.Id);
             HttpContext.Session.SetInt32("isadmin", theUser.Admin ? 1 :0 );
+            HttpContext.Session.SetString("nom", theUser.Nom);
+            HttpContext.Session.SetString("prenom", theUser.Prenom);
+            HttpContext.Session.SetString("username", theUser.Prenom);
+            HttpContext.Session.SetString("photo", theUser.Photo ?? "");
             return RedirectToAction("Index","Home");
 
 
@@ -119,9 +123,8 @@ namespace Voiturage.Controllers
         }
 
         public IActionResult LogOut()
-        {
-            HttpContext.Session.Remove("userid");
-            HttpContext.Session.Remove("isadmin");
+        { 
+            HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }
 

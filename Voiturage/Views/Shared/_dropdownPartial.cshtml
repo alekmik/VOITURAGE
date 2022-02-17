@@ -22,7 +22,7 @@
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    blabla
+                    @Context.Session.GetString("username")
                 </a>
                 <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
                     <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="*">Liste des Trajets</a></li>
@@ -39,7 +39,7 @@
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    blabli
+                    @Context.Session.GetString("username")
                 </a>
                 <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
                     <li><a class="dropdown-item" asp-area="" asp-controller="Profile" asp-action="ListTrips">Vos trajet</a></li>

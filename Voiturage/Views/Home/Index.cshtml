@@ -77,7 +77,7 @@
     <div class="row ">
         @foreach (BestRides ride in bestRides)
         {
-            <div class="col-12 col-sm-4 mb-3" onclick="location.href='/Search'" style="cursor:pointer">
+            <div class="col-12 col-sm-4 mb-3" onclick="document.getElementById('')" style="cursor:pointer">
                 @Html.Partial("_annonceSimplifiee", ride)
             </div>
         }
