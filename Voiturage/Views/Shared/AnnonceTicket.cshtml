@@ -9,7 +9,7 @@
             <strong>
                 <span>
                     <!-- Heure de départ / Ville de départ / Prix -->
-                    18:00@*@Model.HeureDepart.ToString("HH:mm")*@
+                    @Model.HeureDepart.ToString("HH:mm")
                     @Model.VilleDepart.Nom
                     <i style="float:right"> @Model.Prix € </i>
                 </span>
@@ -20,8 +20,9 @@
         <h6 class="card-title">
             <strong>
                 <span>
-                    23:00 @Model.VilleArrivee.Nom
-                    <i style="float:right"> 20 février 2022 </i>
+                    @Model.HeureArrivee.ToString("HH:mm")
+                    @Model.VilleArrivee.Nom
+                    <i style="float:right"> @Model.HeureDepart.Date.ToString("dd MMM yyyy") </i>
                 </span>
             </strong>
         </h6>
@@ -47,17 +48,19 @@
             <p class="card-text">
                 <small>
                     <span>
-
-                        @if (Model.Avis.Count() > 4)
+                        @{
+                            ICollection<Avis> notes = Model.Chauffeur.Notes; 
+                        }
+                        @if (notes.Count() > 4)
                         {
 
-                            double note = Math.Round(Model.Avis.Average(x => x.Note) * 2, MidpointRounding.AwayFromZero) / 2; /* Note du user */
+                            double note = Math.Round(notes.Average(x => x.Note) * 2, MidpointRounding.AwayFromZero) / 2; /* Note du user */
 
                             @for (int i = 0; i < Math.Floor(note); i++)
                             {   /* Etoile remplie  */
                                 <i class="bi bi-star-fill" style="color:#FFC043"></i>
                             }
-                            @if (note > Math.Floor(note))
+                            @if (note > Math.Floor(note) )
                             {
                                 /* Etoile semi-remplie  */
                                 <i class="bi bi-star-half" style="color:#FFC043"></i>
@@ -70,7 +73,7 @@
                             }
                         else
                         {
-                            <i>L'utilisateur n'a pas assez d'avis</i>
+                            <i style="font-size:9px">Pas assez d'avis</i>
                         }
                         <!-- Nombre de passagers dispo -->
                         <i class="bi bi-people-fill" style="float:right" title="Nombre de passagers max"> @Model.Place / @Model.PlaceMax</i>

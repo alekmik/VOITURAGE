@@ -27,7 +27,7 @@ namespace Voiturage.Controllers
         {
             if(ModelState.IsValid)
             {
-                return View(_db.Trajets.Include(x=>x.Chauffeur).ThenInclude(x=>x.Notes).Include(x=>x.Chauffeur.Voiture).Include(x=>x.VilleDepart).Include(x=>x.VilleArrivee).Where(x=>x.IdVilleDepart==search.IdVilleDepart && x.IdVilleArrivee==search.IdVilleArrivee && x.HeureDepart.Date==search.DateDepart.Date && x.Place>=search.PlacesRequises));
+                return View(_db.Trajets.Include(x=>x.Chauffeur.Voiture).Include(x=>x.Chauffeur).ThenInclude((x=>x.Notes)).Include(x=>x.VilleDepart).Include(x=>x.VilleArrivee).Where(x=>x.IdVilleDepart==search.IdVilleDepart && x.IdVilleArrivee==search.IdVilleArrivee && x.HeureDepart.Date==search.DateDepart.Date && x.Place>=search.PlacesRequises));
             }
             TempData["Error"] = "Recherche invalide";
             return RedirectToAction("Index","Home");

@@ -48,11 +48,10 @@ namespace Voiturage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateAvis(Avis avis,int idTrajet)
         {
-            byte[] userid = new byte[4];
-            bool connected = HttpContext.Session.TryGetValue("UserID", out userid);
-            if (connected)
+            int ? userid = HttpContext.Session.GetInt32("userid");
+            if (userid!=null)
             {
-                avis.IdNotant = BitConverter.ToInt32(userid);
+                avis.IdNotant = userid ?? 0;
                 avis.IdTrajet = idTrajet;
                 Trajet trajet = _voiturageContext.Trajets.Include(t => t.Passagers).FirstOrDefault(t=>t.Id == idTrajet);
                 if(trajet == null)

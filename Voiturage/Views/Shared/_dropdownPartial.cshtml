@@ -25,8 +25,8 @@
                     @Context.Session.GetString("username")
                 </a>
                 <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
-                    <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="*">Liste des Trajets</a></li>
-                    <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="*">Liste des profils</a></li>
+                    <li><a class="dropdown-item" asp-area="" asp-controller="Trips" asp-action="Index">Liste des Trajets</a></li>
+                    <li><a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Index">Liste des profils</a></li>
                     <li><a class="dropdown-item" asp-area="" asp-controller="Login" asp-action="LogOut">Déconnexion</a></li>
                 </ul>
             </li>

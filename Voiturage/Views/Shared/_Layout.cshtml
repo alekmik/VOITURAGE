@@ -8,11 +8,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Voiturage.styles.css" asp-append-version="true" />
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/volant-people-removebg-preview.png">
 
 </head>
 <body>
@@ -26,12 +24,12 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="navbar-collapse collapse d-sm-inline-flex">
                     <ul class="navbar-nav flex-grow-1">
                         @if (Context.Session.GetInt32("isadmin") == 0)
                         {
                             <li class="nav-item align-self-center">
-                                <a class="nav-link" asp-area="" asp-controller="PublierTrajet" asp-action="Index" style="color:deepskyblue"><i class="bi bi-plus-circle"></i> Publier un trajet</a>
+                                <a class="nav-link" asp-area="" asp-controller="PublierTrajet" asp-action="Index" style="color:deepskyblue"><i class="bi bi-plus-circle"></i>Publier un trajet</a>
                             </li>
                         }
                         @if(Context.Session.GetInt32("isadmin") == 1)
@@ -70,7 +68,7 @@
             @RenderBody()
         </main>
     </div>
-
+    
     <footer class="border-top footer text-muted">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white" style="position: relative; left: 15%;">
             <div class="navbar-collapse collapse justify-content-between">

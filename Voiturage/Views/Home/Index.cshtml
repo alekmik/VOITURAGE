@@ -15,7 +15,7 @@
     <form method="post" asp-controller="Search" id="homeSearchForm" class="position-absolute bottom-0 start-50 translate-middle-x mb-2">
         <div class="row align-items-center">
             <div class="col-12 col-lg mb-2">
-                <select onchange="let option = document.getElementById('startOption1'); if (option != null) { option.remove() }" class="form-select ms-lg-3 align-self-end" asp-for="IdVilleDepart">
+                <select id="villeDepartSelect" onchange="let option = document.getElementById('startOption1'); if (option != null) { option.remove() }" class="form-select ms-lg-3 align-self-end" asp-for="IdVilleDepart">
                     <option id="startOption1" >Départ</option>
                     @foreach (Ville city in cities)
                     {
@@ -24,7 +24,7 @@
                 </select>
             </div>
             <div class="col-12 col-lg mb-2">
-                <select onchange="let option = document.getElementById('startOption2'); if (option != null) { option.remove() }" class="form-select align-self-end" asp-for="IdVilleArrivee">
+                <select id="villeArriveeSelect" onchange="let option = document.getElementById('startOption2'); if (option != null) { option.remove() }" class="form-select align-self-end" asp-for="IdVilleArrivee">
                     <option id="startOption2">Destination</option>
                     @foreach (Ville city in cities)
                     {
@@ -33,7 +33,7 @@
                 </select>
             </div>
             <div class="col">
-                <input asp-for="DateDepart" type="date" class="ms-5 ms-lg-0"/>
+                <input id="dateDepart" asp-for="DateDepart" type="datetime-local" class="ms-5 ms-lg-0"/>
             </div>
             <div class="col">
                 <i class="bi bi-people-fill text-light"></i>
@@ -77,7 +77,7 @@
     <div class="row ">
         @foreach (BestRides ride in bestRides)
         {
-            <div class="col-12 col-sm-4 mb-3" onclick="document.getElementById('')" style="cursor:pointer">
+            <div class="col-12 col-sm-4 mb-3" onclick="document.getElementById('dateDepart').setAttribute('value',new Date().toISOString()); document.getElementById('villeDepartSelect').value = @ride.VilleDepart.Id; document.getElementById('villeArriveeSelect').value = @ride.VilleArrivee.Id; document.getElementById('homeSearchForm').submit()" style="cursor:pointer">
                 @Html.Partial("_annonceSimplifiee", ride)
             </div>
         }
