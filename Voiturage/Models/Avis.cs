@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+/*
+ * Classe représentant un avis
+ * */
 namespace Voiturage.Models
 {
     public partial class Avis
