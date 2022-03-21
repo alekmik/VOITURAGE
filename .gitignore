@@ -407,3 +407,4 @@ ASALocalRun/
 
 #appsettings differ for every contributor
 appsettings.json
+./Voiturage/obj/Debug/net6.0/Voiturage.csproj.AssemblyReference.cache
